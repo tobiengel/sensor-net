@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <% include partials/head %> 
+
+	<% include partials/script %>
+  </head>
+  <body>
+
+	<% include partials/menu %>
+	
+
+	<ul>
+	<% nodes.forEach(function(node) { %>
+        <li>SensorNode name:<%= node.name %></li>
+		<li>SensorNode IP:<%= node.ip %></li>
+		</li><ul>
+		<% node.sensors.forEach(function(sensor) { %>
+			<li>Sensor model:<%= sensor.model %></li>
+
+		<% }); %>
+		</ul></li>
+    <% }); %>
+	</ul>
+
+  </body>
+  
+</html>	
