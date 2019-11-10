@@ -5,8 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     unit: DataTypes.STRING,
 	keyword: DataTypes.STRING
   }, {});
-  SensorType.associate = function(models) {
-    // associations can be defined here
+  SensorType.associate = function(models) {  
+    SensorType.hasMany(models.Sensor, {
+		foreignKey: 'sensornode_id',
+		as: 'sensortype'
+	});
   };
   return SensorType;
 };

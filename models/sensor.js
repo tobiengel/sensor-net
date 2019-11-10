@@ -15,6 +15,11 @@ module.exports = (sequelize, DataTypes) => {
 		onDelete: 'CASCADE',
 	});
 	
+	Sensor.belongsTo(models.SensorType, {
+		foreignKey: 'sensortype_id',
+		onDelete: 'CASCADE',
+	});
+	
   };
   return Sensor;
 };
