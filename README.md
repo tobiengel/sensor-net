@@ -14,4 +14,4 @@
 5. run the server
 * **npm start** or **bin/www**
 
-**At this point, the server is receiving sensordata via the mqtt broker. Currently only the temperature sensor is present and logged.
+**At this point, the server is receiving sensordata via the mqtt broker. Currently only the temperature sensor is present and logged.**

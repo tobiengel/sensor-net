@@ -17,6 +17,7 @@
     "mariadb": "^2.1.2",
     "morgan": "^1.9.1",
     "mqtt": "^3.0.0",
+    "ol": "^6.1.1",
     "path": "^0.12.7",
     "sequelize": "^5.21.2",
     "serve-favicon": "^2.5.0"

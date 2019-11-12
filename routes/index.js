@@ -8,12 +8,13 @@ module.exports = function(app_global) {
 	router.get('/', function(req, res, next) {
 		//{ include: [{ model: Sensor, as: 'sensors' }] }
 	  SensorNode.findAll({ include: [{ all: true }]}).then(nodes => {
+		//console.log(nodes[0].coordinates);
 		res.render('index', { 
 			title: app_global.title,
-			test: 'Sensor-net variable from server',
 			menuId: "test",
 			nodes: nodes,
-			nodesJSON: JSON.stringify(nodes)
+			nodesJSON: JSON.stringify(nodes),
+			center: nodes[0].coordinates.coordinates
 		});
 	  
 	 });	

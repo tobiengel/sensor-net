@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html>
-  
-  <head>
-    <% include partials/head %> 
-
+<head>
+	<% include partials/head %> 
 	<% include partials/script %>
-  </head>
-  <body>
+</head>
+<body>
 
+	<!-- navigation menu - responsive -->
 	<% include partials/menu %>
 	
-
-	<ul>
-	<% nodes.forEach(function(node) { %>
-        <li>SensorNode name:<%= node.name %></li>
-		<li>SensorNode IP:<%= node.ip %></li>
-		</li><ul>
-		<% node.sensors.forEach(function(sensor) { %>
-			<li>Sensor model:<%= sensor.model %></li>
-
+	<!-- full screen map -->
+	<div class="container-fluid" >
+	
+		<!-- map anchor -->
+		<div id="map" class="map"> </div>
+		
+		<!-- instantiate the nodes & their overlays -->
+		<% nodes.forEach(function(node) { %>
+			<%- include('partials/sensornode', {node: node}); %>
 		<% }); %>
-		</ul></li>
-    <% }); %>
-	</ul>
-
-  </body>
-  
+		
+	</div>
+	
+	<!-- JS magic for the map -->
+	<% include partials/map %>
+	
+	<!-- launch all overlays -->
+	<script>
+	<% nodes.forEach(function(node) { %>
+		addOverlayAtCoords("<%= node.name %>", "<%= node.ip %>", <%= node.coordinates.coordinates[0] %>, <%= node.coordinates.coordinates[1] %>);
+	<% }); %>
+	</script>
+	
+</body>
 </html>	
