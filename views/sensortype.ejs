@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include partials/head %> 
+	<% include partials/script %>
+</head>
+<body>
+
+	<!-- navigation menu - responsive -->
+	<% include partials/menu %>
+	
+	<!-- full screen map -->
+	<div class="container-fluid" >
+	
+		
+		<!-- instantiate the nodes & their overlays -->
+		<%- include('partials/sensortype', {sensortype: sensortype}); %>
+		
+	</div>
+	<hr>
+	<a href="/sensortypes/new">Add sensor type</a>
+	
+</body>
+</html>	

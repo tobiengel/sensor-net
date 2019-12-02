@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include partials/head %> 
+	<% include partials/script %>
+</head>
+<body>
+
+	<!-- navigation menu - responsive -->
+	<% include partials/menu %>
+	
+	<!-- full screen map -->
+	<div class="container-fluid" >
+			<%- include('partials/admin/sensornode', {node: node}); %>
+	</div>
+	
+
+	
+</body>
+</html>	

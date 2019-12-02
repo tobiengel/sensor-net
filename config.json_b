@@ -1,0 +1,30 @@
+{
+  "development": {
+    "username": "sensornet",
+    "password": "fBK8qnqYqWH9VmcU",
+    "database": "sensornet",
+    "host": "127.0.0.1",
+    "dialect": "mariadb",
+    "operatorsAliases": false,
+	"logging": false,
+	"dialectOptions": {
+				"timezone": "Etc/GMT-6"
+			}
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  }
+}

@@ -1,0 +1,6 @@
+<div>Model: <%= sensor.model %></div>
+<div>Type: <%= sensor.SensorType.name %></div>
+<div>Unit: <%= sensor.SensorType.unit %></div>
+<div>MQTT Keyword: <%= sensor.SensorType.keyword %></div>
+<div><a href="/nodes/<%= node.id %>/sensors/<%= sensor.id %>/edit">Edit sensor</a></div>
+<div><a class="delete_link" href="/nodes/<%= node.id %>/sensors/<%= sensor.id %>" >Delete sensor</a></div>

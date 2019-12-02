@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include partials/head %> 
+	<% include partials/script %>
+</head>
+<body>
+
+	<!-- navigation menu - responsive -->
+	<% include partials/menu %>
+	
+	<!-- full screen map -->
+	<div class="container-fluid" >
+	
+		
+		<!-- instantiate the nodes & their overlays -->
+		<% nodes.forEach(function(node) { %>
+			<%- include('partials/admin/sensornode', {node: node}); %>
+		<% }); %>
+		
+	</div>
+	<hr>
+	<a href="nodes/add">Add node</a>
+	
+</body>
+</html>	
