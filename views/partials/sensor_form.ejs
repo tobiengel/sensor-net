@@ -1,0 +1,12 @@
+<div class='container overlay' id='Sensor_<%= sensor.id %>'>
+<div>Model: <input name='model' type="text" value=<%= sensor.model %>></div>
+<div>SensorType <select name="sensortype_id">
+<% sensortypes.forEach(function(type) { %>
+	<option value='<%= type.id %>'><%= type.name %></option>
+
+<% }); %>
+</select>
+
+
+</div>
+</div>

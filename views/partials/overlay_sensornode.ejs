@@ -1,0 +1,14 @@
+<div class='overlay' data-id='<%= node.id %>' id='<%= node.name.replace(" ","_") %>'>
+	<div class="overlay_title"><%= node.name %> - <%= node.sensors.length %> Sensors</div>
+	<div class="detail_info" id="<%= node.name.replace(" ","_") %>_info">
+		<div><%= node.ip %></div>
+		<div >
+			<div class="card">
+				<div class="card-body overlay-card">
+					<canvas id="chart_<%= node.id %>"  ></canvas>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

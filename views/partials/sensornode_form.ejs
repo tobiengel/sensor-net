@@ -1,0 +1,6 @@
+<div class='container overlay' id='<%= node.name.replace(" ","_") %>'>
+<div>IP: <input name='ip' type="text" value=<%= node.ip %>></div>
+<div>Name: <input name='name' type="text" value=<%= node.name %>></div>
+<div>Description <textarea name='description'><%= node.description %></textarea></div>
+<div>Coordinates <input name='lat' type="text" value=<%= node.coordinates.coordinates[0] %>>   <input name='lon' type="text" value=<%= node.coordinates.coordinates[1] %>></div>
+</div>
