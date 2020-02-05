@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<% include partials/head %> 
-	<% include partials/script %>
+	<% include partials/_head %> 
+	<% include partials/_script %>
 </head>
 <body>
 
 	<!-- navigation menu - responsive -->
-	<% include partials/menu %>
+	<% include partials/_menu %>
 	
 	<!-- full screen map -->
 	<div class="container-fluid" >
@@ -17,7 +17,7 @@
 		
 		<!-- instantiate the nodes & their overlays -->
 		<% nodes.forEach(function(node) { %>
-			<%- include('partials/sensornode', {node: node}); %>
+			<%- include('partials/overlay_sensornode', {node: node}); %>
 		<% }); %>
 		
 	</div>
@@ -28,7 +28,11 @@
 	<!-- launch all overlays -->
 	<script>
 	<% nodes.forEach(function(node) { %>
-		addOverlayAtCoords("<%= node.name %>", "<%= node.ip %>", <%= node.coordinates.coordinates[0] %>, <%= node.coordinates.coordinates[1] %>);
+		addOverlayAtCoords("<%= node.name %>", "<%= node.ip %>", <%= node.coordinates.coordinates[0] %>, <%= node.coordinates.coordinates[1] %>, <%= node.id %>);
+		<% node.sensors.forEach(function(sensor) { %>
+			initSensorData(<%= node.id %>, <%= sensor.id %>);
+			jobs.push(function(){fetchSensorData(<%= node.id %>, <%= sensor.id %>);});
+		<% }); %>
 	<% }); %>
 	</script>
 	

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<% include partials/head %> 
-	<% include partials/script %>
+	<% include partials/_head %> 
+	<% include partials/_script %>
 </head>
 <body>
 
 	<!-- navigation menu - responsive -->
-	<% include partials/menu %>
+	<% include partials/_menu %>
 	
 	<!-- full screen map -->
 	<div class="container-fluid" >
@@ -15,7 +15,7 @@
 		
 		<!-- instantiate the nodes & their overlays -->
 		<% nodes.forEach(function(node) { %>
-			<%- include('partials/admin/sensornode', {node: node}); %>
+			<%- include('partials/sensornode', {node: node}); %>
 		<% }); %>
 		
 	</div>

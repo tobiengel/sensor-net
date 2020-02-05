@@ -1,5 +1,14 @@
 <script>
 
+	var pointColor = [
+		"#aa0000",
+		"#0000aa"
+	];
+	var pointColorBG = [
+		"#dd0000",
+		"#0000dd"
+	];
+
 	var map = new ol.Map({
 		target: 'map',
 		layers: [
@@ -20,7 +29,33 @@
 		})
 	});
 	
-	function addOverlayAtCoords(name, ip, lat, lon){
+	
+	var chartMapping = new Array;
+	
+	function addData(chart, line, label, data) {
+		chart.data.labels.push(label);
+		
+		if(!chart.data.datasets)
+			chart.data.datasets = new Array;
+		
+		if(!chart.data.datasets[line]){
+			chart.data.datasets[line] = new Object;
+			chart.data.datasets[line].data = new Array;
+			chart.data.datasets[line].yAxisID = "scale_" + line;
+			//chart.data.datasets[line].labels = new Array;
+
+			chart.data.datasets[line].pointBackgroundColor = pointColorBG[line];
+			chart.data.datasets[line].pointBorderColor  = pointColor[line];
+			chart.data.datasets[line].pointRadius  = 2;
+		}
+		
+		
+		chart.data.datasets[line].data.push(data);
+		//chart.data.datasets[line].labels.push(label);
+		chart.update();
+	}
+	
+	function addOverlayAtCoords(name, ip, lat, lon, id){
 		var coordinate = ol.proj.fromLonLat([lon, lat]);
 		var name = name.replace(" ", "_");
 		var overlays = new ol.Overlay({
@@ -29,6 +64,102 @@
 		});
 
 		map.addOverlay(overlays);
+		
+	
+		var chLine = document.getElementById("chart_" + id);
+		if (chLine) {
+		  var c = new Chart(chLine, {
+		  type: 'line',
+		 
+		  //data: chartData,
+		  options: {
+			
+			responsive:true,
+			scales: {
+			  yAxes: [{
+				id: 'scale_0',
+				type: 'linear',
+				position: 'left',
+			  },{
+				id: 'scale_1',
+				type: 'linear',
+				position: 'right',
+			  }
+			  ],
+			  xAxes: [{
+                type: 'time',
+                time: {
+                    unit: 'hours',
+					displayFormats: {
+					  'day': 'HH:mm'
+					}
+                }
+			  }]
+			},
+			legend: {
+			  display: false
+			}
+		  }
+		  });
+		  
+		var nodeInfo = new Object;
+		nodeInfo.id = id;
+		nodeInfo.chart = c;
+		nodeInfo.sensorMapping = new Array;
+		chartMapping[id] = nodeInfo;
+		}
+		
+	}
+	
+	function handleData(nodeInfo, sensor, data){
+		var label = moment(data.createdAt).unix();
+		var data = data.value;
+		
+		console.log(label + " " + data);
+	
+				
+		//check if sensorMapping is existing
+		if(nodeInfo.sensorMapping.includes(sensor)){
+			var sensorIndex = nodeInfo.sensorMapping.indexOf(sensor);
+			addData(nodeInfo.chart, sensorIndex, label, data);
+		}
+		else{ //new sensordata for this node
+			var last = nodeInfo.chart.data.datasets.length;
+			nodeInfo.sensorMapping.push(sensor);
+			
+			addData(nodeInfo.chart, last, label, data);
+		}	
+	}
+	
+	function initSensorData(node, sensor){
+		var url = "nodes/" + node + "/sensors/" + sensor + "/data/5";
+		
+		$.get(url, function(response){
+			response = JSON.parse(response);
+			var nodeInfo = chartMapping[node];
+			
+			response.forEach(function(data){
+				handleData(nodeInfo, sensor, data);
+			});
+			
+			
+		});	
+	};
+	
+	
+	function fetchSensorData(node, sensor){
+		//var target = $("#chart_"+node);
+		var url = "nodes/" + node + "/sensors/" + sensor + "/data/last";
+		
+		$.get(url, function(response){
+			response = JSON.parse(response);
+			var nodeInfo = chartMapping[node];
+			
+			handleData(nodeInfo, sensor, response[0]);
+		});
+		
+		
+		
 	}
 	
 </script>

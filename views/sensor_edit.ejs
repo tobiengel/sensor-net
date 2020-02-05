@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<% include partials/head %> 
-	<% include partials/script %>
+	<% include partials/_head %> 
+	<% include partials/_script %>
 </head>
 <body>
 
 	<!-- navigation menu - responsive -->
-	<% include partials/menu %>
+	<% include partials/_menu %>
 	
-	<!-- full screen map -->
+
 	<div class="container-fluid" >
 	
 		<form method="post" action="/nodes/<%= node.id %>/sensors/<%= sensor.id %>/<%= action %>">
-			<%- include('partials/sensor_edit', {sensor: sensor}); %>
+			<%- include('partials/sensor_form', {sensor: sensor}); %>
 			<input type="submit" value="Ok">
 		</form>
 		
